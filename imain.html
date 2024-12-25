@@ -1,11 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>API Documentation - Chain of Care</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Hello Madhav </h1>
+
+<body class="bg-gray-100 font-sans text-gray-900">
+    <div class="container mx-auto px-6 py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-indigo-600">Chain of Care API Documentation</h1>
+            <p class="text-xl text-gray-600 mt-4">An API to manage the full chain of care for patients in the healthcare system</p>
+        </header>
+
+        <section class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-indigo-600">1. Patient</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-800">POST /api/patients</h3>
+                    <p class="mt-2 text-gray-700">Create a new patient record.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "name": "John Doe",
+  "age": 35,
+  "condition": ["infection"]
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">GET /api/patients/:id</h3>
+                    <p class="mt-2 text-gray-700">Retrieve a patient by their unique ID.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">Response: {
+ {
+    "_id": "676af0fa18204c7a86ab9449",
+    "patientId": 4,
+    "name": "John Doe",
+    "age": 35,
+    "condition": [
+        "infection"
+    ],
+    "interventions": [],
+    "createdAt": "2024-12-24T17:35:54.571Z",
+    "updatedAt": "2024-12-24T17:35:54.571Z",
+    "__v": 0
+}
+</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">PUT /api/patients/:id</h3>
+                    <p class="mt-2 text-gray-700">Update a patient's record by their unique ID.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "name": "John Doe",
+  "age": 35,
+  "condition": ["Viral infections"]
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">DELETE /api/patients/:id</h3>
+                    <p class="mt-2 text-gray-700">Delete a patient record by ID.</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold text-indigo-600">2. Intervention</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-800">POST /api/interventions</h3>
+                    <p class="mt-2 text-gray-700">Create a new intervention record.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "patientId": 4,
+  "description": "john Doe Viral infections get overcome"
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">GET /api/interventions?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Get interventions for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">Response: [
+ {
+    "_id": "676af0fa18204c7a86ab9449",
+    "patientId": 4,
+    "name": "john Doe",
+    "age": 35,
+    "condition": [
+        "Viral infections"
+    ],
+    "interventions": [
+        {
+            "_id": "676af1b918204c7a86ab9450",
+            "patientId": 4,
+            "description": "john Doe Viral infections get overcome ",
+            "date": "2024-12-24T17:39:05.239Z",
+            "createdAt": "2024-12-24T17:39:05.240Z",
+            "updatedAt": "2024-12-24T17:39:05.240Z",
+            "__v": 0
+        }
+    ],
+    "createdAt": "2024-12-24T17:35:54.571Z",
+    "updatedAt": "2024-12-24T17:39:05.316Z",
+    "__v": 1
+}
+]</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">PUT /api/interventions?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Update an intervention for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "patientId": 4,
+  "description": "Viral infections starting again"
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">DELETE /api/interventions?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Delete an intervention for a specific patient.</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold text-indigo-600">3. Product</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-800">POST /api/products</h3>
+                    <p class="mt-2 text-gray-700">Create a new product or service record.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "patientId": "4",
+  "name": "Viral infections Scan",
+  "type": "SERVICE",
+  "category": "Diagnostic",
+  "description": "Full body scan",
+  "cost": 1500
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">GET /api/products?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Get products or services for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">Response: [
+  [
+    {
+        "_id": "676af29c18204c7a86ab9457",
+        "patientId": 4,
+        "name": " Viral infections Scan",
+        "type": "SERVICE",
+        "category": "Diagnostic",
+        "description": "Full body scan",
+        "cost": 1500,
+        "patient": "676af0fa18204c7a86ab9449",
+        "date": "2024-12-24T17:42:52.489Z",
+        "createdAt": "2024-12-24T17:42:52.489Z",
+        "updatedAt": "2024-12-24T17:42:52.489Z",
+        "__v": 0
+    }
+]
+</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">PUT /api/products?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Update a product/service for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "patientId": "4",
+  "name": "Viral infections Scan",
+  "cost": 6000
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">DELETE /api/products?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Delete a product/service for a specific patient.</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold text-indigo-600">4. Full Chain</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-800">POST /api/chain</h3>
+                    <p class="mt-2 text-gray-700">Create a new chain entry for a patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "patientId": "4",
+  "type": "INTERVENTION",
+  "notes": "Initial consultation"
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">GET /api/chain?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Get the full chain of care for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">Response: [
+ {
+    "status": "success",
+    "data": {
+        "patient": {
+            "id": "676af0fa18204c7a86ab9449",
+            "patientId": 4,
+            "name": "john Doe",
+            "age": 35
+        },
+        "chainEntries": {
+            "count": 1,
+            "entries": [
+                {
+                    "_id": "676af2db18204c7a86ab945d",
+                    "patientId": 4,
+                    "type": "INTERVENTION",
+                    "status": "PENDING",
+                    "notes": "Initial consultation",
+                    "patient": {
+                        "_id": "676af0fa18204c7a86ab9449",
+                        "patientId": 4,
+                        "name": "john Doe",
+                        "age": 35
+                    },
+                    "date": "2024-12-24T17:43:55.180Z",
+                    "createdAt": "2024-12-24T17:43:55.180Z",
+                    "updatedAt": "2024-12-24T17:43:55.180Z",
+                    "__v": 0
+                }
+            ]
+        },
+        "products": {
+            "count": 1,
+            "entries": [
+                {
+                    "_id": "676af29c18204c7a86ab9457",
+                    "patientId": 4,
+                    "name": " Viral infections Scan",
+                    "type": "SERVICE",
+                    "category": "Diagnostic",
+                    "description": "Full body scan",
+                    "cost": 1500,
+                    "patient": "676af0fa18204c7a86ab9449",
+                    "date": "2024-12-24T17:42:52.489Z",
+                    "createdAt": "2024-12-24T17:42:52.489Z",
+                    "updatedAt": "2024-12-24T17:42:52.489Z",
+                    "__v": 0
+                }
+            ]
+        },
+        "interventions": {
+            "count": 2,
+            "entries": [
+                {
+                    "_id": "676af1b918204c7a86ab9450",
+                    "patientId": 4,
+                    "description": "john Doe Viral infections get overcome ",
+                    "date": "2024-12-24T17:39:05.239Z",
+                    "createdAt": "2024-12-24T17:39:05.240Z",
+                    "updatedAt": "2024-12-24T17:39:05.240Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "6769a0491c67c3df65884845",
+                    "patientId": 4,
+                    "description": "Viral infections starting again",
+                    "date": "2024-12-23T17:39:21.553Z",
+                    "createdAt": "2024-12-23T17:39:21.557Z",
+                    "updatedAt": "2024-12-24T17:41:58.024Z",
+                    "__v": 0
+                }
+            ]
+        }
+    }
+}
+]</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">PUT /api/chain?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Update the status or notes in the care chain for a specific patient.</p>
+                    <pre class="bg-gray-100 p-4 rounded-lg mt-4"><code class="language-bash">{
+  "status": "IN_PROGRESS",
+  "notes": "Treatment ongoing - Day 2"
+}</code></pre>
+
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6">DELETE /api/chain?patientId=patientId</h3>
+                    <p class="mt-2 text-gray-700">Delete a chain entry for a specific patient.</p>
+
+                    <p class="text-2xl font-semibold "> Use localhost:3000 for testing</p>
+                </div>
+
+               
+            </div>
+        </section>
+
+
+          
+
+        <footer class="text-center text-gray-600 mt-12">
+            <p>&copy; 2024 Chain of Care API Documentation. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
+
 </html>
